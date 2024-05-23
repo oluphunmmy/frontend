@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import BlackButton from './elements/BackButton'
-import Spinner from './elements/Spinner'
 import BackButton from './elements/BackButton'
+import Spinner from './elements/Spinner'
+
 
 const ShowBooks = () => {
     const [book, setbook] = useState({})
@@ -11,10 +11,11 @@ const ShowBooks = () => {
     const { id } = useParams();
 
     useEffect(()=>{
+      setLoading(true)
         axios.get(`http://localhost:3001/api/book/${id}`)
         .then((response)=>{
             setbook(response.data)
-            console.log(response.data)
+            // console.log(response.data)
             setLoading(false)
         })
         .catch((error)=>{
@@ -25,7 +26,7 @@ const ShowBooks = () => {
   return (
     <div className='p-4'>
       <BackButton/>
-      <h1 className='text 3x1 my-4'>ShowBook</h1>
+      <h1 className='text-3xl my-4'>Show Book</h1>
       {
         loading ? (
           <Spinner/>

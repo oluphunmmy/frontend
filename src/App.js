@@ -5,6 +5,8 @@ import EditBook from './components/EditBooks';
 import ShowBook from './components/ShowBooks';
 import CreateBook from './components/CreateBooks';
 import Home from './components/Home';
+import Login from './components/authcomponent/Login'
+import Signup from './components/authcomponent/Signup';
 
 function App() {
   return (
