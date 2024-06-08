@@ -11,7 +11,9 @@ import Signup from './components/authcomponent/Signup';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/' element={<Login/>}/>
+      <Route path='/register' element={<Signup/>}/>
+      <Route path='/home' element={<Home/>}/>
       <Route path='/books/create' element={<CreateBook/>}/>
       <Route path='/books/details/:id' element={<ShowBook/>}/>
       <Route path='/books/edit/:id' element={<EditBook/>}/>
