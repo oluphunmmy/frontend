@@ -8,7 +8,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export const DeleteBooks = () => {
+const DeleteBooks = () => {
 
     const [loading, setLoading] = useState(false);
     const { id } = useParams();

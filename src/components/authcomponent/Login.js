@@ -45,7 +45,7 @@ const [email, setEmail] = useState("")
 
     event.preventDefault();
 
-    const rfrsh = new FormData(event.currentTarget);
+    //const rfrsh = new FormData(event.currentTarget);
 
     const data = {
       email: email,
@@ -58,8 +58,9 @@ const [email, setEmail] = useState("")
       return
 
     }
-    axios.post('http://localhost:3001/login', data)
-      .then(() => {
+    axios.post('http://localhost:3001/auth/book/login', data)
+      .then((response) => {
+        console.log(response, "user credentials")
         toast.success("User signed in Successfully")
         setTimeout(() => {
           navigate('/home');
@@ -69,7 +70,7 @@ const [email, setEmail] = useState("")
       })
       .catch((error)=>{
         console.log(error)
-        toast.error("Error: ", error)
+        toast.error({"Error": error.message})
       })
 
     
@@ -157,4 +158,4 @@ const [email, setEmail] = useState("")
   );
 }
 
-export default Login;
+export default Login;   
