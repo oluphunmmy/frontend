@@ -32,7 +32,7 @@ const CreateBooks = () => {
       setLoading(false)
       toast.success("Book Added Successfully")
       setTimeout(()=>{
-        navigate('/')
+        navigate('/home')
 
       },2000)
       

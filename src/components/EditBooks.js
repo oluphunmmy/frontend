@@ -53,7 +53,7 @@ const EditBooks = () => {
         
 
       })
-      navigate('/')
+      navigate('/home')
     }, 1000)
     .catch((error)=>{
       console.log(error)

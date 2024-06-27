@@ -60,7 +60,8 @@ const [email, setEmail] = useState("")
     }
     axios.post('http://localhost:3001/auth/book/login', data)
       .then((response) => {
-        console.log(response, "user credentials")
+        // console.log(response, "user credentials")
+        localStorage.setItem('token', response.data.token);
         toast.success("User signed in Successfully")
         setTimeout(() => {
           navigate('/home');

@@ -21,7 +21,7 @@ const DeleteBooks = () => {
             console.log(res.data.message);
             toast.success("Deleted Successfully!")
             setTimeout(()=>{
-                navigate('/')
+                navigate('/home')
                 
             }, 1000)
         })
