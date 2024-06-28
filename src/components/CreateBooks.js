@@ -12,14 +12,29 @@ const CreateBooks = () => {
   const [author, setAuthor] = useState('')
   const [publishedYear, setpublishedYear] = useState('')
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  const authurlBook = process.env.REACT_APP_AUTH_URL
 
-  const handleSaveBook = () =>{
+  const handleSaveBook = (event) =>{
+
+    event.preventDefault();
+
+    
     if(!title || !author || !publishedYear){
       toast.error('Fill up all details')
       return
     }
+    if (!token){
+      toast.error('Authorization required. Please login.');
+      setLoading(false);
+      return;
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     const data = {
       title: title,
       author: author,
@@ -27,7 +42,7 @@ const CreateBooks = () => {
     }
     setLoading(true)
 
-    axios.post('http://localhost:3001/api/book/', data)
+    axios.post(`${authurlBook}`, data, {headers})
     .then(()=>{
       setLoading(false)
       toast.success("Book Added Successfully")

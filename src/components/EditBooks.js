@@ -16,25 +16,27 @@ const EditBooks = () => {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+  const authurlBook = process.env.REACT_APP_API_URL
 
-  useEffect(()=>{
+  useEffect(() => {
     setLoading(true)
-    axios.get(`http://localhost:3001/api/book/${id}`)
-    .then((res)=>{
+    axios.get(`${authurlBook}/${id}`)
+      .then((res) => {
         // setTitle(res.data.title)
         // setAuthor(res.data.author)
         // setPublishedYear(res.data.publishedYear)
         setEditedBook(res.data)
         setLoading(false)
-    })
-    .catch((error)=>{
+      })
+      .catch((error) => {
         setLoading(false)
         toast.error("Error: ", error)
-    })
+      })
   })
 
-  const handleEditBook = () =>{
-    if(!title || !author || !publishedYear){
+  const handleEditBook = () => {
+    if (!title || !author || !publishedYear) {
       toast.error('Fill up all details')
       return
     }
@@ -46,71 +48,71 @@ const EditBooks = () => {
     setLoading(true)
 
     axios.put(`http://localhost:3001/api/book/${id}`, data)
-    .then(()=>{
-      setLoading(false)
-      toast.success("Book Edited Successfully")
-      setTimeout(()=>{
-        
+      .then(() => {
+        setLoading(false)
+        toast.success("Book Edited Successfully")
+        setTimeout(() => {
 
+
+        })
+        navigate('/home')
+      }, 1000)
+      .catch((error) => {
+        console.log(error)
+        toast.error("Error: ", error)
       })
-      navigate('/home')
-    }, 1000)
-    .catch((error)=>{
-      console.log(error)
-      toast.error("Error: ", error)
-    })
   }
-  
+
   return (
     <div className='p-4'>
-     <BackButton/>
+      <BackButton />
       <h1 className='text-3xl my-4'>Edit Book</h1>
-        
-        <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
+
+      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
 
         <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Title</label>
           <input
-          type='text'
-          placeholder={editedbook.title}
-          value={title}
-          required
-          onChange={(e)=>setTitle(e.target.value)}
-          className='border-2 border-gray-500 px-4 py-2 w-full'
+            type='text'
+            placeholder={editedbook.title}
+            value={title}
+            required
+            onChange={(e) => setTitle(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
 
         <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Author</label>
           <input
-          type='text'
-          placeholder={editedbook.author}
-          value={author}
-          required
-          onChange={(e)=>setAuthor(e.target.value)}
-          className='border-2 border-gray-500 px-4 py-2 w-full'
+            type='text'
+            placeholder={editedbook.author}
+            value={author}
+            required
+            onChange={(e) => setAuthor(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
 
         <div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>PublishedYear</label>
           <input
-          type='number'
-          placeholder={editedbook.publishedYear}
-          value={publishedYear}
-          required
-          onChange={(e)=>setPublishedYear(e.target.value)}
-          className='border-2 border-gray-500 px-4 py-2 w-full'
+            type='number'
+            placeholder={editedbook.publishedYear}
+            value={publishedYear}
+            required
+            onChange={(e) => setPublishedYear(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' 
-        onClick={handleEditBook}>
+        <button className='p-2 bg-sky-300 m-8'
+          onClick={handleEditBook}>
           Save
         </button>
 
-        </div>
+      </div>
 
-        <ToastContainer/>
+      <ToastContainer />
     </div>
   )
 }

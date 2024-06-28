@@ -38,6 +38,7 @@ const Signup = ()=> {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const authurl = process.env.REACT_APP_API_URL
   
   
 
@@ -56,7 +57,7 @@ const Signup = ()=> {
     }
 
 
-    axios.post('http://localhost:3001/api/book/register', data)
+    axios.post(`${authurl}/register`, data)
     .then(()=>{
       toast.success("User signed up Successfully")
       setTimeout(()=>{
