@@ -15,6 +15,7 @@ const CreateBooks = () => {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
   const authurlBook = process.env.REACT_APP_AUTH_URL
+  
 
   const handleSaveBook = (event) =>{
 
@@ -27,13 +28,12 @@ const CreateBooks = () => {
     }
     if (!token){
       toast.error('Authorization required. Please login.');
-      setLoading(false);
       return;
     }
 
     const headers = {
       Authorization: `Bearer ${token}`,
-    };
+    }
 
     const data = {
       title: title,
@@ -42,7 +42,7 @@ const CreateBooks = () => {
     }
     setLoading(true)
 
-    axios.post(`${authurlBook}`, data, {headers})
+    axios.post(`http://localhost:3001/api/book/`, data, {headers})
     .then(()=>{
       setLoading(false)
       toast.success("Book Added Successfully")

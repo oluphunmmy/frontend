@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -23,7 +23,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Phunmcodes
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -35,12 +35,13 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 const Login = () => {
-  
 
-const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState('')
-  const navigate = useNavigate("")
-  
+  const navigate = useNavigate()
+
+  const authurl = process.env.APP_AUTH_ROUTE
+
   const handleSubmit = (event) => {
 
     event.preventDefault();
@@ -58,28 +59,27 @@ const [email, setEmail] = useState("")
       return
 
     }
-    axios.post('http://localhost:3001/auth/book/login', data)
-      .then((response) => {
+    axios.post(`http://localhost:3001/auth/book/login`, data)
+    .then((response) => {
         // console.log(response, "user credentials")
         localStorage.setItem('token', response.data.token);
         toast.success("User signed in Successfully")
         setTimeout(() => {
-          navigate('/home');
+          navigate('/home')
 
         }, 2000)
 
       })
-      .catch((error)=>{
-        console.log(error)
-        toast.error({"Error": error.message})
+      .catch((error) => {
+        console.log(error.response.data.message)
+        toast.error("Something went wrong, please try again: ", error)
       })
 
-    
   };
 
   return (
     <div>
-      
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -107,7 +107,7 @@ const [email, setEmail] = useState("")
               autoComplete="email"
               autoFocus
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -119,7 +119,7 @@ const [email, setEmail] = useState("")
               id="password"
               autoComplete="current-password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -153,10 +153,10 @@ const [email, setEmail] = useState("")
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
-      
+
   );
 }
 
-export default Login;   
+export default Login

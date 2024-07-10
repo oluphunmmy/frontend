@@ -15,6 +15,7 @@ const BooksTable = ({books}) => {
                   <th className='border border-slate-600 rounded-md'>Title</th>
                   <th className='border border-slate-600 rounded-md max-md:hidden'>Author</th>
                   <th className='border border-slate-600 rounded-md max-md:hidden'>PublishedYear</th>
+                  <th className='border border-slate-600 rounded-md max-md:hidden'>Book Image</th>
                   <th className='border border-slate-600 rounded-md'>Operations</th>
                 </tr>
               </thead>
@@ -33,6 +34,9 @@ const BooksTable = ({books}) => {
                       </td>
                       <td className='border border-slate-700 rounded-md text-center'>
                         {book.publishedYear}
+                        </td>
+                        <td className='border border-slate-700 rounded-md text-center'>
+                          <img src={book.imageUrl} alt={book.imageUrl} />
                         </td>
                         <td className='border border-slate-700 rounded-md text-center'>
                           <div className='flex justify-center gap-x-4'>

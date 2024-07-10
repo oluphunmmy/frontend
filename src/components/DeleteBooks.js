@@ -17,20 +17,19 @@ const DeleteBooks = () => {
     const authurlBook = process.env.REACT_APP_API_URL
 
     const handleDeleteYes = () => {
-        setLoading(true)
+        // setLoading(true)
         if (!token) {
             toast.error('Authorization required. Please login.');
-            setLoading(false);
             return;
         }
 
         const headers = {
-            Authorization: `Bearer ${token}`,
-        };
+            Authorization: `Bearer ${token}`
+        }
 
 
 
-        axios.delete(`${authurlBook}/${id}`, { headers })
+        axios.delete(`${authurlBook}/${id}`, { headers})
             .then((res) => {
                 console.log(res.data.message);
                 toast.success("Deleted Successfully!")

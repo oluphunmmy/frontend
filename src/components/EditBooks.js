@@ -20,8 +20,20 @@ const EditBooks = () => {
   const authurlBook = process.env.REACT_APP_API_URL
 
   useEffect(() => {
+
+    if (!token) {
+      toast.error('Authorization required. Please login.');
+      return;
+  }
+
+  const headers = {
+      Authorization: `Bearer ${token}`
+  }
+
+
+
     setLoading(true)
-    axios.get(`${authurlBook}/${id}`)
+    axios.get(`${authurlBook}/${id}`, {headers})
       .then((res) => {
         // setTitle(res.data.title)
         // setAuthor(res.data.author)
@@ -36,10 +48,16 @@ const EditBooks = () => {
   })
 
   const handleEditBook = () => {
-    if (!title || !author || !publishedYear) {
-      toast.error('Fill up all details')
-      return
-    }
+    // 
+    if (!token) {
+      toast.error('Authorization required. Please login.');
+      return;
+  }
+
+  const headers = {
+      Authorization: `Bearer ${token}`
+  }
+
     const data = {
       title: title,
       author: author,
@@ -47,16 +65,14 @@ const EditBooks = () => {
     }
     setLoading(true)
 
-    axios.put(`http://localhost:3001/api/book/${id}`, data)
+    axios.put(`http://localhost:3001/api/book/${id}`, data, {headers})
       .then(() => {
         setLoading(false)
         toast.success("Book Edited Successfully")
         setTimeout(() => {
-
-
-        })
-        navigate('/home')
-      }, 1000)
+          navigate('/home')
+        }, 1000)
+      })
       .catch((error) => {
         console.log(error)
         toast.error("Error: ", error)
