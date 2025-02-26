@@ -29,7 +29,7 @@ const DeleteBooks = () => {
 
 
 
-        axios.delete(`${authurlBook}/${id}`, { headers})
+        axios.delete(`https://backend-2ozo.onrender.com/api/book/${id}`, { headers})
             .then((res) => {
                 console.log(res.data.message);
                 toast.success("Deleted Successfully!")

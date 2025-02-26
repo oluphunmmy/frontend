@@ -33,7 +33,7 @@ const EditBooks = () => {
 
 
     setLoading(true)
-    axios.get(`${authurlBook}/${id}`, {headers})
+    axios.get(`https://backend-2ozo.onrender.com/api/book`, {headers})
       .then((res) => {
         // setTitle(res.data.title)
         // setAuthor(res.data.author)
@@ -65,7 +65,7 @@ const EditBooks = () => {
     }
     setLoading(true)
 
-    axios.put(`http://localhost:3001/api/book/${id}`, data, {headers})
+    axios.put(`https://backend-2ozo.onrender.com/api/book/${id}`, data, {headers})
       .then(() => {
         setLoading(false)
         toast.success("Book Edited Successfully")
